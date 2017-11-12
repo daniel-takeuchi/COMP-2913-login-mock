@@ -31,8 +31,17 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Allow CORS
+app.use((req, res, next) => {
+  console.log('setting headers');
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.use('/', routes);
 app.use('/users', users);
+
 
 /// catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -40,6 +49,7 @@ app.use((req, res, next) => {
     err.status = 404;
     next(err);
 });
+
 
 /// error handlers
 
