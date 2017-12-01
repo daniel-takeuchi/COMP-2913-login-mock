@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 const express = require('express');
 const router = express.Router();
 
@@ -27,6 +29,17 @@ router.get('/user_info', (req, res) => {
     last_name: 'Tester',
     email: 'john@tester.com'
   });
+});
+
+router.get('/search', (req, res) => {
+  console.log(req)
+  axios.get('http://api.duckduckgo.com/', { params: req.query })
+    .then((response) => {
+      res.json(response.data);
+    })
+    .catch((error) => {
+      res.json(error);
+    });
 });
 
 module.exports = router;

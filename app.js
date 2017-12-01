@@ -34,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Allow CORS
 app.use((req, res, next) => {
   console.log('setting headers');
+  res.header("Access-Control-Allow-Headers", "*");
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
